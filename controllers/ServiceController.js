@@ -83,7 +83,7 @@ const deleteservice = async(req,res)=>{
 
             res.status(200).json({
 
-                message:"Service created successfully...",
+                message:"Service deleted successfully...",
                 data:deletedservice,
                 flag:1
             })
@@ -99,7 +99,7 @@ const deleteservice = async(req,res)=>{
 
     }catch(e){
 
-        res.body(500).json({
+        res.status(500).json({
             
             message:"Error in server !!!",
             data:e,
@@ -142,10 +142,46 @@ const updateservice = async(req,res)=>{
     }
 }
 
+const getSproviderByServiceId = async(req,res)=>{
+
+    try{
+
+        const id = req.params.id;
+        const services = await servicemodel.find({serviceprovider:id}).populate('category').populate('type').populate('subcategory');
+
+        if (services == null) {
+
+            res.status(404).json({
+                messaage: "service provider not found !!!",
+                flag: -1
+            })
+
+        } else {
+            res.status(200).json({
+                message: "Fetched service provider...",
+                data: services,
+                flag: 1
+            });
+        }
+
+
+    }catch(e){
+
+        res.status(500).json({
+            message:"Error in server !!!",
+            data:e,
+            flag:-1
+        })
+    }
+}
+
+
+
 module.exports={
     createservice,
     getservice,
     deleteservice,
     getserviceById,
-    updateservice
+    updateservice,
+    getSproviderByServiceId
 }

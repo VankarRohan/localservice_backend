@@ -34,6 +34,38 @@ const getAllBooking = async (req, res) => {
     }
 };
 
+const getBookingByUserId = async (req,res) => {
+
+
+    try {
+
+
+        const id = req.params.id;
+        const bookings = await BookingSchema.find({ user: id })
+
+        if (bookings == null) {
+
+            res.status(404).json({
+                messaage: "booking not found !!!",
+                flag: -1
+            })
+        }
+
+        else {
+            res.status(200).json({
+                message: "Fetched Bookings...",
+                data: bookings,
+                flag: 1
+            });
+
+
+        }
+    } catch (error) {
+
+        
+       console.log(error)
+    }
+}
 
 const updateBooking = async (req, res) => {
     try {
@@ -55,39 +87,39 @@ const updateBooking = async (req, res) => {
     }
 }
 
-const updateBookingStatus =  async(req,res)=>{
+const updateBookingStatus = async (req, res) => {
 
 
-    try{
+    try {
 
         req.body = {
-            "status":"done"
+            "status": "done"
         }
         const body = req.body
-        const updatedbookingstatus = await BookingSchema.findByIdAndUpdate(req.params.id,body)
+        const updatedbookingstatus = await BookingSchema.findByIdAndUpdate(req.params.id, body)
 
-        if(updatedbookingstatus != null ){
+        if (updatedbookingstatus != null) {
             res.status(201).json({
 
-                message:"Booking done..",
-                data:updatedbookingstatus,
-                flag:1
+                message: "Booking done..",
+                data: updatedbookingstatus,
+                flag: 1
             })
-        }else{
+        } else {
             res.status(404).json({
 
-                message:"Booking not found !",
+                message: "Booking not found !",
                 // data:updatedbookingstatus,
-                flag:-1
+                flag: -1
             })
 
         }
-    }catch(e){
+    } catch (e) {
 
         res.status(500).json({
-            message:"Error to book !",
-            data:e,
-            flag:-1
+            message: "Error to book !",
+            data: e,
+            flag: -1
         })
     }
 }
@@ -98,6 +130,7 @@ module.exports = {
     createBooking,
     updateBooking,
     getAllBooking,
-    updateBookingStatus
+    updateBookingStatus,
+    getBookingByUserId
 
 }
