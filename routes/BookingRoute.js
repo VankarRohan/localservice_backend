@@ -8,6 +8,7 @@ routes.get("/booking",bookingcontroller.getAllBooking);
 routes.put("/booking/:id",bookingcontroller.updateBooking)
 routes.put("/bookingstatus/:id",bookingcontroller.updateBookingStatus)
 routes.get("/booking/user/:id",bookingcontroller.getBookingByUserId)
+routes.delete("/booking/:id",bookingcontroller.deletebooking)
 
 
 module.exports = routes  

@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 
 const serviceSchema = new Schema({
 
-  // servicename: {
-  //   type: String,
-  //   required: true,
-  // },
+  servicename: {
+    type: String,
+    required: true,
+  },
   serviceprovider: {
     type: Schema.Types.ObjectId,
     ref: "ServiceProvider"
@@ -40,5 +40,8 @@ const serviceSchema = new Schema({
     type: String,
     max: 20,
   },
+  imageUrl:{
+    type:String
+  }
 });
 module.exports = mongoose.model("Service", serviceSchema);

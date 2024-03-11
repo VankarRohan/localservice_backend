@@ -67,6 +67,41 @@ const getBookingByUserId = async (req,res) => {
     }
 }
 
+const deletebooking = async(req,res)=>{
+
+    try{
+
+        const deletedbooking = await BookingSchema.findByIdAndDelete(req.params.id);
+
+        if(deletedbooking != null){
+
+            res.status(200).json({
+
+                message:"Booking canceled successfully...",
+                data:deletedbooking,
+                flag:1
+            })
+
+        }else{
+
+            res.status(404).json({
+
+                message:"Category not found !!!",
+                flag:-1
+            })
+        }
+
+
+    }catch(e){
+
+        res.status(500).json({
+
+            message:"Error in server !!!",
+            data:e,
+            flag:-1
+        })
+    }
+}
 const updateBooking = async (req, res) => {
     try {
         const id = req.params.id;
@@ -131,6 +166,7 @@ module.exports = {
     updateBooking,
     getAllBooking,
     updateBookingStatus,
-    getBookingByUserId
+    getBookingByUserId,
+    deletebooking
 
 }
