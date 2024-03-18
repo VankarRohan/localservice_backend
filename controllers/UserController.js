@@ -57,6 +57,29 @@ const getuser = async (req, res) => {
     }
 }
 
+const getUserById = async (req, res) => {
+
+    try {
+
+        const id = req.params.id
+        const savedUser = await userModel.findById(id).populate("role")
+
+        res.status(200).json({
+            message: "Fetched service provider...",
+            data: savedUser,
+            flag: 1
+        })
+
+    } catch (e) {
+
+        res.status(500).json({
+            message: "Error in server !!!",
+            data: e,
+            flag: -1
+        })
+    }
+}
+
 const deleteuser = async (req, res) => {
 
     try {
@@ -179,5 +202,6 @@ module.exports = {
     getuser,
     deleteuser,
     updateuser,
-    loginuser
+    loginuser,
+    getUserById
 }

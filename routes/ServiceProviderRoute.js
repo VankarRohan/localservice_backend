@@ -3,6 +3,7 @@ const serviceprovidercontroller = require('../controllers/ServiceProviderControl
 
 router.post("/sprovider",serviceprovidercontroller.createSprovider)
 router.get("/sprovider",serviceprovidercontroller.getSprovider)
+router.get("/sprovider/:id",serviceprovidercontroller.getSproviderById)
 router.delete("/sprovider/:id",serviceprovidercontroller.deleteSprovider)
 router.put("/sprovider/:id",serviceprovidercontroller.updateSprovider)
 // router.get("/sprovider/:id",serviceprovidercontroller.getSproviderByServiceId)

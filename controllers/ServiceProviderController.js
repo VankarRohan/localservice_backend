@@ -55,6 +55,29 @@ const getSprovider = async (req, res) => {
     }
 }
 
+const getSproviderById = async (req, res) => {
+
+    try {
+
+        const id = req.params.id
+        const savedSprovider = await serviceprovidermodel.findById(id).populate("role")
+
+        res.status(200).json({
+            message: "Fetched service provider...",
+            data: savedSprovider,
+            flag: 1
+        })
+
+    } catch (e) {
+
+        res.status(500).json({
+            message: "Error in server !!!",
+            data: e,
+            flag: -1
+        })
+    }
+}
+
 const deleteSprovider = async (req, res) => {
 
     try {
@@ -209,6 +232,7 @@ module.exports = {
     getSprovider,
     deleteSprovider,
     updateSprovider,
-    loginserviceprovider
+    loginserviceprovider,
+    getSproviderById
     // getSproviderByServiceId
 }

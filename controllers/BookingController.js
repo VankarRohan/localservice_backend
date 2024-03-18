@@ -67,6 +67,39 @@ const getBookingByUserId = async (req,res) => {
     }
 }
 
+const getBookingByServiceProviderId = async (req, res) => {
+
+
+    try {
+
+
+        const id = req.params.id;
+        const bookings = await BookingSchema.find({ serviceprovider: id }).populate("user")
+
+        if (bookings == null) {
+
+            res.status(404).json({
+                messaage: "booking not found !!!",
+                flag: -1
+            })
+        }
+
+        else {
+            res.status(200).json({
+                message: "Fetched Bookings...",
+                data: bookings,
+                flag: 1
+            });
+
+
+        }
+    } catch (error) {
+
+
+        console.log(error)
+    }
+}
+
 const deletebooking = async(req,res)=>{
 
     try{
@@ -102,6 +135,7 @@ const deletebooking = async(req,res)=>{
         })
     }
 }
+
 const updateBooking = async (req, res) => {
     try {
         const id = req.params.id;
@@ -159,6 +193,63 @@ const updateBookingStatus = async (req, res) => {
     }
 }
 
+const pendingStatusById = async (req, res) => {
+
+    try {
+        const id = req.params.id
+        const doneStatus = (await BookingSchema.find({ status: "Pending", user: id }).populate("serviceprovider").populate("user"))
+        if (doneStatus && doneStatus.length > 0) {
+            res.status(200).json({
+                message: "Pending Status are found",
+                data: doneStatus,
+                flag: 1
+            })
+        } else {
+            res.status(404).json({
+                message: "No Pending Status Found!",
+                data: [],
+                flag: -1
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: "Server error",
+            flag: -1,
+            data: []
+        })
+    }
+}
+
+const doneStatusById = async (req, res) => {
+    try {
+        const id = req.params.id
+        const doneStatus = (await BookingSchema.find({
+            status: "done", user: id
+        }).populate("serviceprovider")
+            .populate("user"))
+        if (doneStatus && doneStatus.length > 0) {
+            res.status(200).json({
+                message: "Done Status are found",
+                data: doneStatus,
+                flag: 1,
+            });
+        } else {
+            res.status(404).json({
+                message: "No Done Status Found!",
+                data: [],
+                flag: -1,
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: "Server error",
+            flag: -1,
+            data: [],
+        });
+    }
+};
+
+
 
 module.exports = {
 
@@ -167,6 +258,9 @@ module.exports = {
     getAllBooking,
     updateBookingStatus,
     getBookingByUserId,
-    deletebooking
+    deletebooking,
+    getBookingByServiceProviderId,
+    pendingStatusById,
+    doneStatusById
 
 }

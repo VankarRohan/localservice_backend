@@ -179,6 +179,7 @@ const getSproviderByServiceId = async (req, res) => {
 const filterProduct = async (req, res) => {
 
     console.log(req.query)
+    
 
 
     const savedservice =await servicemodel.find({ servicename: { $regex: req.query.servicename, $options: "i" } })
