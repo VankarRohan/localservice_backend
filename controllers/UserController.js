@@ -2,6 +2,70 @@ const userModel = require("../models/UserModel");
 const encrypt = require("../utils/Encrypt")
 
 
+const resetPassword = async (req, res) => {
+
+    const email = req.body.email
+    const password = req.body.password
+
+    console.log(email)
+    console.log(password)
+
+    const hashedPassword = encrypt.encryptpassword(password)
+    try {
+
+        const updateUser = await userModel.findOneAndUpdate({ email: email }, { $set: { password: hashedPassword } })
+
+        res.status(200).json({
+            message: "Password updated successfully",
+            flag: 1,
+        })
+        // console.log("updated password ...", password)
+
+
+    } catch (error) {
+
+        console.log(error)
+        res.status(500).json({
+            message: "Error in updating password",
+        })
+    }
+}
+
+const isUserExist = async (req, res) => {
+
+    try {
+
+        const email = req.body.email
+
+        const getUserByEmail = await userModel.findOne({ email: email }).populate('role')
+        if (getUserByEmail) {
+
+            res.status(200).json({
+                message: "User found",
+                flag: 1,
+                data: getUserByEmail
+            })
+
+
+        } else {
+
+            res.status(404).json({
+                message: "User not found",
+                flag: -1
+            })
+        }
+
+
+
+    } catch (err) {
+        res.status(500).json({
+            message: "Error in getting employee by email",
+        })
+
+    }
+}
+
+
 const createuser = async (req, res) => {
 
     try {
@@ -203,5 +267,7 @@ module.exports = {
     deleteuser,
     updateuser,
     loginuser,
-    getUserById
+    getUserById,
+    resetPassword,
+    isUserExist
 }

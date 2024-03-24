@@ -7,5 +7,7 @@ router.get("/user/:id", userController.getUserById)
 router.delete("/user/:id",userController.deleteuser)
 router.put("/user/:id",userController.updateuser)
 router.post("/user/login",userController.loginuser)
+router.post("/user/isuserexist", userController.isUserExist)
+router.post("/user/resetpassword", userController.resetPassword)
 
 module.exports = router

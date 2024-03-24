@@ -2,6 +2,69 @@ const serviceprovidermodel = require('../models/ServiceProviderModel');
 const encrypt = require("../utils/Encrypt")
 
 
+const isSerproExist = async (req, res) => {
+
+    try {
+
+        const email = req.body.email
+
+        const getSerproByEmail = await serviceprovidermodel.findOne({ email: email }).populate('role')
+        if (getSerproByEmail) {
+
+            res.status(200).json({
+                message: "Service Provider found",
+                flag: 1,
+                data: getSerproByEmail
+            })
+
+
+        } else {
+
+            res.status(404).json({
+                message: "Service Provider not found",
+                flag: -1
+            })
+        }
+
+
+
+    } catch (err) {
+        res.status(500).json({
+            message: "Error in getting employee by email",
+        })
+
+    }
+}
+
+const resetPassword = async (req, res) => {
+
+    const email = req.body.email
+    const password = req.body.password
+
+    console.log(email)
+    console.log(password)
+
+    const hashedPassword = encrypt.encryptpassword(password)
+    try {
+
+        const updateSerpro = await serviceprovidermodel.findOneAndUpdate({ email: email }, { $set: { password: hashedPassword } })
+
+        res.status(200).json({
+            message: "Password updated successfully",
+            flag: 1,
+        })
+        
+
+
+    } catch (error) {
+
+        console.log(error)
+        res.status(500).json({
+            message: "Error in updating password",
+        })
+    }
+}
+
 const createSprovider = async (req, res) => {
 
     try {
@@ -233,6 +296,8 @@ module.exports = {
     deleteSprovider,
     updateSprovider,
     loginserviceprovider,
-    getSproviderById
+    getSproviderById,
+    isSerproExist,
+    resetPassword
     // getSproviderByServiceId
 }
