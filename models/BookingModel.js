@@ -13,7 +13,7 @@ const bookingSchema  = new Schema({
     },
     user:{
         type:Schema.Types.ObjectId,
-        ref:"User"
+        ref: "User1"
     },
     totalAmount:{
         type: Number,
@@ -22,6 +22,11 @@ const bookingSchema  = new Schema({
     status:{
         type:String,
         default: "Pending"
+    },
+    address: {
+        type: Schema.Types.ObjectId,
+        ref: "Address",
+    default: null
     }
 })
 

@@ -25,6 +25,7 @@ const typeRoutes = require("./routes/TypeRoute.js")
 const serviceRoutes = require("./routes/ServiceRoute.js")
 const bookingRoutes = require("./routes/BookingRoute.js")
 const uploadRoutes = require("./routes/UploadRoutes.js")
+const addressRoutes = require("./routes/AddressRoutes.js")
 
 app.use("/roles",roleRoutes)
 app.use("/users",userRoutes)
@@ -35,6 +36,7 @@ app.use("/types",typeRoutes)
 app.use("/services",serviceRoutes)
 app.use("/bookings",bookingRoutes)
 app.use("/uploads",uploadRoutes)
+app.use("/addresses",addressRoutes)
 
 
 

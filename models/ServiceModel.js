@@ -40,8 +40,8 @@ const serviceSchema = new Schema({
     type: String,
     max: 20,
   },
-  imageUrl:{
-    type:String
-  }
+  // imageUrl:{
+  //   type:String
+  // }
 });
 module.exports = mongoose.model("Service", serviceSchema);

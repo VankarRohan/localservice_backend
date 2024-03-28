@@ -142,7 +142,7 @@ const updateBooking = async (req, res) => {
         const updateBooking = await RoleSchema.findByIdAndUpdate(id)
 
         res.status(201).json({
-            message: "Role updated successfully..",
+            message: "Booking updated successfully..",
             flag: 1,
             data: updateBooking,
         })
@@ -161,11 +161,9 @@ const updateBookingStatus = async (req, res) => {
 
     try {
 
-        req.body = {
-            "status": "done"
-        }
-        const body = req.body
-        const updatedbookingstatus = await BookingSchema.findByIdAndUpdate(req.params.id, body)
+
+
+        const updatedbookingstatus = await BookingSchema.findByIdAndUpdate(req.params.id, req.body).populate("address")
 
         if (updatedbookingstatus != null) {
             res.status(201).json({
@@ -224,7 +222,7 @@ const doneStatusById = async (req, res) => {
     try {
         const id = req.params.id
         const doneStatus = (await BookingSchema.find({
-            status: "done", user: id
+            status: "Done", user: id
         }).populate("serviceprovider")
             .populate("user"))
         if (doneStatus && doneStatus.length > 0) {

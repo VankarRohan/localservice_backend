@@ -28,6 +28,14 @@ const servicePSchema = new Schema({
   role:{
     type:Schema.Types.ObjectId,
     ref:"Role"
+  },
+  latitude: {
+    type: String
+
+  },
+  longitude: {
+    type: String
+
   }
 });
 

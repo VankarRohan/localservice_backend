@@ -9,5 +9,7 @@ router.put("/user/:id",userController.updateuser)
 router.post("/user/login",userController.loginuser)
 router.post("/user/isuserexist", userController.isUserExist)
 router.post("/user/resetpassword", userController.resetPassword)
+router.post("/user/address", userController.createaddress)
+
 
 module.exports = router

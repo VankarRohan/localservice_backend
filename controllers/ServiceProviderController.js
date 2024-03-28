@@ -77,6 +77,9 @@ const createSprovider = async (req, res) => {
             password: hashedPassword,
             phone: req.body.phone,
             role: req.body.role,
+            latitude: req.body.latitude,
+            longitude: req.body.longitude,
+
         };
         const savedServiceProvider = await serviceprovidermodel.create(serviceProviderObj);
         // const savedSprovider = await serviceprovidermodel.create(req.body)
