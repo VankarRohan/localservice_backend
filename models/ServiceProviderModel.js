@@ -29,14 +29,7 @@ const servicePSchema = new Schema({
     type:Schema.Types.ObjectId,
     ref:"Role"
   },
-  latitude: {
-    type: String
 
-  },
-  longitude: {
-    type: String
-
-  }
 });
 
 module.exports = mongoose.model("ServiceProvider", servicePSchema);

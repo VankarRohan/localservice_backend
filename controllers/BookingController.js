@@ -34,6 +34,42 @@ const getAllBooking = async (req, res) => {
     }
 };
 
+const getBookingById = async (req,res) => {
+
+
+    try {
+
+
+        const id = req.params.id;
+        const bookings = await BookingSchema.findById(id).populate('serviceId')
+
+        if (bookings == null) {
+
+            // console.log(error)
+
+            res.status(404).json({
+                messaage: "booking not found !!!",
+                flag: -1
+            })
+        }
+
+        else {
+            res.status(200).json({
+                message: "Fetched Booking...",
+                data: bookings,
+                flag: 1
+            });
+
+
+        }
+    } catch (error) {
+
+        
+       console.log(error)
+    }
+}
+
+
 const getBookingByUserId = async (req,res) => {
 
 
@@ -41,9 +77,11 @@ const getBookingByUserId = async (req,res) => {
 
 
         const id = req.params.id;
-        const bookings = await BookingSchema.find({ user: id })
+        const bookings = (await BookingSchema.find({ user: id }).populate('serviceprovider').populate('serviceId'))
 
         if (bookings == null) {
+
+            // console.log(error)
 
             res.status(404).json({
                 messaage: "booking not found !!!",
@@ -74,7 +112,7 @@ const getBookingByServiceProviderId = async (req, res) => {
 
 
         const id = req.params.id;
-        const bookings = await BookingSchema.find({ serviceprovider: id }).populate("user")
+        const bookings = await BookingSchema.find({ serviceprovider: id }).populate("user").populate("address")
 
         if (bookings == null) {
 
@@ -160,8 +198,6 @@ const updateBookingStatus = async (req, res) => {
 
 
     try {
-
-
 
         const updatedbookingstatus = await BookingSchema.findByIdAndUpdate(req.params.id, req.body).populate("address")
 
@@ -253,6 +289,7 @@ module.exports = {
 
     createBooking,
     updateBooking,
+    getBookingById,
     getAllBooking,
     updateBookingStatus,
     getBookingByUserId,

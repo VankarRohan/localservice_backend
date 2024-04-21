@@ -40,8 +40,17 @@ const serviceSchema = new Schema({
     type: String,
     max: 20,
   },
-  // imageUrl:{
-  //   type:String
-  // }
+  latitude: {
+
+    type: String
+    // default:null
+  },
+  longitude: {
+    type: String
+    // default:nul
+  },
+  imageUrl:{
+    type:String
+  }
 });
 module.exports = mongoose.model("Service", serviceSchema);

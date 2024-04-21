@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 const bookingSchema  = new Schema({
 
     serviceId:{
-        type:Schema.Types.ObjectId,
-        ref:"service"
+        type: Schema.Types.ObjectId,
+        ref:"Service"
     },
     serviceprovider:{
         type:Schema.Types.ObjectId,
@@ -26,7 +26,7 @@ const bookingSchema  = new Schema({
     address: {
         type: Schema.Types.ObjectId,
         ref: "Address",
-    default: null
+        default: null
     }
 })
 

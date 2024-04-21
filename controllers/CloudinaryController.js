@@ -1,6 +1,6 @@
 const cloudinary = require('cloudinary').v2
 
-const uploadImage = (file)=>{
+const uploadImage = async(file)=>{
 
     cloudinary.config({
 
@@ -9,9 +9,17 @@ const uploadImage = (file)=>{
         api_secret:"lw7Jxe8rDT_YyRYYltD2qUlhb-o"
     })
 
-    cloudinary.uploader.upload(file,(error,result)=>{
+    try {
 
-    })
+        const result = await cloudinary.uploader.upload(file);
+        return result;
+        
+    } catch (error) {
+        
+        console.log(error)
+    }
+
+   
 }
 module.exports={
     uploadImage
