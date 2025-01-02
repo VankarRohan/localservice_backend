@@ -3,11 +3,15 @@ const mongoose = require('mongoose');
 const app = express();
 const cors = require('cors')
 app.use(cors())
-const PORT = 4000
+const PORT = process.env.PORT || 4000
 
 app.use(express.json())
 
 var db = mongoose.connect("mongodb://127.0.0.1:27017/LocalServiceManagement")
+
+// var db = mongoose.connect("mongodb+srv://vankarrohan56:rohan%40123@cluster0.bnil0sn.mongodb.net/LocalServiceManagement")
+
+// mongodb+srv://vankarrohan56:<password>@cluster0.bnil0sn.mongodb.net/
 
 db.then(()=>{
     console.log("Successfully connected to mongodb...")

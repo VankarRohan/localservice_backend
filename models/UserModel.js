@@ -1,27 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-// const addressSchema = require("./AddressModel")
 
-
-// const addressSchema = new Schema({
-//   address: {
-//     type: String,
-//     required: true
-//   },
-//   city: {
-//     type: String,
-//     required: true
-//   },
-//   state: {
-//     type: String,
-//     required: true
-//   },
-//   postalCode: {
-//     type: String,
-//     required: true
-//   },
-
-// });
 
 const userSchema = new Schema({
   name: {
