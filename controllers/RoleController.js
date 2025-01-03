@@ -38,7 +38,7 @@ const getroledata = async (req, res) => {
 
     } catch (e) {
 
-        res.staus(500).json({
+        res.status(500).json({
             message: "Error in server !!!",
             data: e,
             flag: -1
