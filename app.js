@@ -6,13 +6,7 @@ app.use(cors())
 const PORT = process.env.PORT || 4000
 
 app.use(express.json())
-const corsOptions = {
-    origin: 'https://effulgent-florentine-9bdcc7.netlify.app', // Replace with your frontend's domain (e.g., 'https://yourwebsite.com')
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Specify allowed methods
-    credentials: true, // If you're using cookies or authorization headers
-  };
-  
-  app.use(cors(corsOptions));
+
 
 // var db = mongoose.connect("mongodb://127.0.0.1:27017/LocalServiceManagement")
 
